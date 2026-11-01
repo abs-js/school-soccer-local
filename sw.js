@@ -1,4 +1,4 @@
-const CACHE = "soccer-v6";
+const CACHE = "soccer-v7";
 const FILES = ["./index.html", "./game.js", "./styles.css", "./gamepad-fix.js", "./manifest.json", "./icon.svg"];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting()));
