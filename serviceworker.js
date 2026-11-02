@@ -1,6 +1,6 @@
 /* School Soccer mini boy — offline cache */
-const CACHE = "school-soccer-v3";
-const CORE = ["./", "./index.html", "./styles.css", "./script.js", "./manifest.json", "./icon.svg"];
+const CACHE = "school-soccer-3c8252a4f2ca";
+const CORE = ["./", "./index.html", "./styles.css", "./game.js", "./manifest.json", "./icon.svg"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(CORE)).then(() => self.skipWaiting()));
@@ -10,7 +10,7 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches
       .keys()
-      .then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key))))
+      .then((keys) => Promise.all(keys.filter((key) => key.startsWith("school-soccer-") && key !== CACHE).map((key) => caches.delete(key))))
       .then(() => self.clients.claim())
   );
 });
@@ -28,7 +28,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE).then((cache) => cache.put(request, copy)).catch(() => {});
           return response;
         })
-        .catch(() => caches.match("./index.html"));
+        .catch(() => request.mode === "navigate" ? caches.match("./index.html") : Response.error());
     })
   );
 });
