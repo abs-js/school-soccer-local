@@ -1,5 +1,5 @@
 /* School Soccer mini boy — offline cache */
-const CACHE = "school-soccer-3c8252a4f2ca";
+const CACHE = "school-soccer-c31acbf6fb67";
 const CORE = ["./", "./index.html", "./styles.css", "./game.js", "./manifest.json", "./icon.svg"];
 
 self.addEventListener("install", (event) => {
